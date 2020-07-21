@@ -734,6 +734,7 @@ export enum SLIDE_OBJECT_TYPES {
 	'tablecell' = 'tablecell',
 	'text' = 'text',
 	'notes' = 'notes',
+	'xml' = 'xml',
 }
 export enum PLACEHOLDER_TYPES {
 	'title' = 'title',

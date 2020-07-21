@@ -665,8 +665,11 @@ function slideObjectToXml(slide: ISlideLib | ISlideLayout): string {
 				strSlideXml += '</p:graphicFrame>'
 				break
 
+			case SLIDE_OBJECT_TYPES.xml:
+				strSlideXml += '</p:graphicFrame>'
+				break
 			default:
-				strSlideXml += ''
+				strSlideXml += slideItemObj.text
 				break
 		}
 	})

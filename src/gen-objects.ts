@@ -888,6 +888,19 @@ export function addTableDefinition(
 }
 
 /**
+ * Adds a xml object to a slide definition.
+ * @param {ISlideLib} target - slide object that the text should be added to
+ * @param {string|IText[]} text text string or object
+ * @since: X.X.X
+ */
+export function addXMLDefinition(target: ISlideLib, xml: string) {
+	target.data.push({
+		text: xml,
+		type: SLIDE_OBJECT_TYPES.xml,
+	})
+}
+
+/**
  * Adds a text object to a slide definition.
  * @param {ISlideLib} target - slide object that the text should be added to
  * @param {string|IText[]} text text string or object
