@@ -1,4 +1,4 @@
-/* PptxGenJS 3.2.1 @ 2020-07-21T00:47:46.768Z */
+/* PptxGenJS 3.2.1 @ 2020-07-21T14:50:23.025Z */
 'use strict';
 
 var JSZip = require('jszip');
@@ -1905,10 +1905,10 @@ function slideObjectToXml(slide) {
                 strSlideXml += '</p:graphicFrame>';
                 break;
             case SLIDE_OBJECT_TYPES.xml:
-                strSlideXml += '</p:graphicFrame>';
+                strSlideXml += slideItemObj.text;
                 break;
             default:
-                strSlideXml += slideItemObj.text;
+                strSlideXml += '';
                 break;
         }
     });
