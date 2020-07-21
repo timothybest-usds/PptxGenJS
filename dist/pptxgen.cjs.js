@@ -1,4 +1,4 @@
-/* PptxGenJS 3.2.1 @ 2020-05-25T19:45:07.798Z */
+/* PptxGenJS 3.2.1 @ 2020-07-21T00:47:46.768Z */
 'use strict';
 
 var JSZip = require('jszip');
@@ -546,6 +546,7 @@ var SLIDE_OBJECT_TYPES;
     SLIDE_OBJECT_TYPES["tablecell"] = "tablecell";
     SLIDE_OBJECT_TYPES["text"] = "text";
     SLIDE_OBJECT_TYPES["notes"] = "notes";
+    SLIDE_OBJECT_TYPES["xml"] = "xml";
 })(SLIDE_OBJECT_TYPES || (SLIDE_OBJECT_TYPES = {}));
 var PLACEHOLDER_TYPES;
 (function (PLACEHOLDER_TYPES) {
@@ -1903,8 +1904,11 @@ function slideObjectToXml(slide) {
                 strSlideXml += ' </a:graphic>';
                 strSlideXml += '</p:graphicFrame>';
                 break;
+            case SLIDE_OBJECT_TYPES.xml:
+                strSlideXml += '</p:graphicFrame>';
+                break;
             default:
-                strSlideXml += '';
+                strSlideXml += slideItemObj.text;
                 break;
         }
     });
@@ -3657,6 +3661,18 @@ function addTableDefinition(target, tableRows, options, slideLayout, presLayout,
     }
 }
 /**
+ * Adds a xml object to a slide definition.
+ * @param {ISlideLib} target - slide object that the text should be added to
+ * @param {string|IText[]} text text string or object
+ * @since: X.X.X
+ */
+function addXMLDefinition(target, xml) {
+    target.data.push({
+        text: xml,
+        type: SLIDE_OBJECT_TYPES.xml,
+    });
+}
+/**
  * Adds a text object to a slide definition.
  * @param {string|IText[]} text
  * @param {ITextOpts} opt
@@ -3953,6 +3969,15 @@ var Slide = /** @class */ (function () {
      */
     Slide.prototype.addText = function (text, options) {
         addTextDefinition(this, text, options, false);
+        return this;
+    };
+    /**
+     * Add xml to Slide
+     * @param {string} xml - xml string
+     * @return {Slide} this Slide
+     */
+    Slide.prototype.addXML = function (xml) {
+        addXMLDefinition(this, xml);
         return this;
     };
     return Slide;
