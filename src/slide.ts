@@ -202,4 +202,14 @@ export default class Slide {
 		genObj.addTextDefinition(this, text, options, false)
 		return this
 	}
+
+	/**
+	 * Add xml to Slide
+	 * @param {string} xml - xml string
+	 * @return {Slide} this Slide
+	 */
+	addXML(xml: string): Slide {
+		genObj.addXMLDefinition(this, xml)
+		return this
+	}
 }
