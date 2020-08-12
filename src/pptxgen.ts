@@ -514,13 +514,13 @@ export default class PptxGenJS implements IPresentation {
 			return Promise.all(arrChartPromises).then(() => {
 				if (outputType === 'STREAM') {
 					// A: stream file
-					return zip.generateAsync({ type: 'nodebuffer' })
+					return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' })
 				} else if (outputType) {
 					// B: Node [fs]: Output type user option or default
-					return zip.generateAsync({ type: outputType })
+					return zip.generateAsync({ type: outputType, compression: 'DEFLATE' })
 				} else {
 					// C: Browser: Output blob as app/ms-pptx
-					return zip.generateAsync({ type: 'blob' })
+					return zip.generateAsync({ type: 'blob', compression: 'DEFLATE' })
 				}
 			})
 		})
