@@ -1,4 +1,4 @@
-/* PptxGenJS 3.2.1 @ 2020-07-21T14:50:23.033Z */
+/* PptxGenJS 3.2.1 @ 2020-08-12T00:59:18.415Z */
 import * as JSZip from 'jszip';
 
 /**
@@ -4311,7 +4311,7 @@ function createExcelWorksheet(chartObject, zip) {
         }
         // C: Add XLSX to PPTX export
         zipExcel
-            .generateAsync({ type: 'base64' })
+            .generateAsync({ type: 'base64', compression: 'DEFLATE' })
             .then(function (content) {
             // 1: Create the embedded Excel worksheet with labels and data
             zip.file('ppt/embeddings/Microsoft_Excel_Worksheet' + chartObject.globalId + '.xlsx', content, { base64: true });
@@ -6079,15 +6079,15 @@ var PptxGenJS = /** @class */ (function () {
                 return Promise.all(arrChartPromises).then(function () {
                     if (outputType === 'STREAM') {
                         // A: stream file
-                        return zip.generateAsync({ type: 'nodebuffer' });
+                        return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
                     }
                     else if (outputType) {
                         // B: Node [fs]: Output type user option or default
-                        return zip.generateAsync({ type: outputType });
+                        return zip.generateAsync({ type: outputType, compression: 'DEFLATE' });
                     }
                     else {
                         // C: Browser: Output blob as app/ms-pptx
-                        return zip.generateAsync({ type: 'blob' });
+                        return zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
                     }
                 });
             });
