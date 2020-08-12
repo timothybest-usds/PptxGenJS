@@ -391,7 +391,7 @@ export function createExcelWorksheet(chartObject: ISlideRelChart, zip: JSZip): P
 
 		// C: Add XLSX to PPTX export
 		zipExcel
-			.generateAsync({ type: 'base64' })
+			.generateAsync({ type: 'base64', compression: 'DEFLATE' })
 			.then(content => {
 				// 1: Create the embedded Excel worksheet with labels and data
 				zip.file('ppt/embeddings/Microsoft_Excel_Worksheet' + chartObject.globalId + '.xlsx', content, { base64: true })
